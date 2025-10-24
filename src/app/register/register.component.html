@@ -1,0 +1,37 @@
+
+<div class="flex items-center justify-center min-h-screen bg-slate-800 text-foreground">
+<z-card class="w-full max-w-sm shadow-amber-950 shadow-2xl" zTitle="Login to your account" zDescription="Enter your email below to login to your account">
+    <form  [formGroup]="loginForm" class="space-y-6 max-w-sm">
+    <div class="space-y-4">
+    <z-form-field>
+        <label z-form-label zRequired [for]="idEmail">E-Mail</label>
+        <z-form-control>
+          <input z-input formControlName="email" type="text" [id]="idEmail" placeholder="m@example.com" name="email" [zStatus]="emailControl.invalid && emailControl.touched ? 'error' : undefined"/>
+        </z-form-control>
+      
+      </z-form-field>
+ 
+   
+        <div class="space-y-2">
+         <z-form-field>
+            <label z-form-label zRequired="" [for]="idPassword"> Password </label>
+          
+         </z-form-field>
+          <input
+            z-input
+            [id]="idPassword"
+            type="password"
+            formControlName="password"
+            required
+            [zStatus]="passwordControl.invalid && passwordControl.touched ? 'error' : undefined"
+          />
+        </div>
+        <div class="space-y-2">
+          <z-button zType="default" class="w-full" (click)="signUp()" >Sign Up</z-button>
+          <z-button zType="outline" class="w-full" (click)="goHome()">Cancel</z-button>
+        </div>
+      </div>
+      </form>  
+    </z-card>
+    
+    </div>
