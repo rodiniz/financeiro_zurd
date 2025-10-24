@@ -16,12 +16,12 @@ export abstract  class GenericService<T> {
     return this.httpclient.get<Observable<Array<T>>>(`/api/${this._urlgroup}`);
   }
   post(entity:T){
-    this.httpclient.post(`/api${this._urlgroup}`,entity)
+    return this.httpclient.post(`/api${this._urlgroup}`,entity)
   }
   put(id:number, entity:T){
-    this.httpclient.put(`/api${this._urlgroup}`,entity)
+    return this.httpclient.put(`/api${this._urlgroup}`,entity)
   }
   delete(id:number){
-    this.httpclient.delete(`/api${this._urlgroup}/{id}`) 
+    return this.httpclient.delete(`/api${this._urlgroup}/{id}`) 
   }
 }

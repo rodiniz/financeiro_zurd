@@ -5,6 +5,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ExpenseslistComponent } from './expenseslist/expenseslist.component';
 import { FulldashboardComponent } from './fulldashboard/fulldashboard.component';
 import { Categorylist } from './categorylist/categorylist';
+import { CategoryEdit } from './categoryEdit/categoryEdit';
 
 export const routes: Routes = [
     {
@@ -31,9 +32,17 @@ export const routes: Routes = [
                 path:'expenses',
                 component:ExpenseslistComponent
             },
-             {
+            {
                 path:'categorys',
                 component:Categorylist
+            },
+            {
+                path:'category/:id',
+                component:CategoryEdit
+            },
+            {
+                path:'category',
+                component:CategoryEdit
             }
         ]
     }

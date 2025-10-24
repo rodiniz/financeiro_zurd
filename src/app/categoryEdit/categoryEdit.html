@@ -1,0 +1,22 @@
+<z-card class="w-full max-w-sm shadow-white shadow-2xl" zTitle="Login to your account" zDescription="Enter your email below to login to your account">
+    <h2>{{ isEditing ? 'Edit Category' : 'New Category' }}</h2>
+    
+    <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+    <input type="hidden" formControlName="id">
+      <z-form-field>
+            <label z-form-label zRequired >Category Name</label>
+            <z-form-control>
+            <input z-input formControlName="name" type="text" [id]="nameControl" name="name" 
+            [zStatus]="nameControl.invalid && nameControl.touched ? 'error' : undefined"/>
+        </z-form-control>
+      
+       </z-form-field>      
+       
+        <div class="button-group mt-3">            
+            <button type="submit" class="btn btn-primary" [disabled]="categoryForm.invalid">
+                Save
+            </button>
+            <z-button zType="default" class="w-full" (click)="cancel()" >Cancel</z-button>          
+        </div>
+    </form>
+</z-card>
