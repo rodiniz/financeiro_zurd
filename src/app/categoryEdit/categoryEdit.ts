@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, Input } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ZardButtonComponent } from '@shared/components/button/button.component';
 import { ZardCardComponent } from '@shared/components/card/card.component';
 import { ZardFormModule } from '@shared/components/form/form.module';
@@ -11,7 +11,7 @@ import { toast } from 'ngx-sonner';
 @Component({
   selector: 'app-category-edit',
   imports: [ReactiveFormsModule, ZardCardComponent, ZardButtonComponent,
-    ZardFormModule, ZardInputDirective, ZardFormModule],
+    ZardFormModule, ZardInputDirective,FormsModule],
   templateUrl: './categoryEdit.html',
   styleUrl: './categoryEdit.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -20,8 +20,9 @@ export class CategoryEdit {
   @Input() id!: number;
   categoryService=inject(CategoryService);
   isEditing: boolean=false;
+  isSubmiting=false;
   categoryForm= new FormGroup({    
-    id: new FormControl<number>(this.id, [Validators.required]),
+    id: new FormControl<number>(this.id),
     name: new FormControl('', [Validators.required])
   });
   router=inject(Router);
@@ -31,7 +32,9 @@ export class CategoryEdit {
   }
 
   onSubmit() {
+    debugger;
     if(this.categoryForm.valid){
+        this.isSubmiting=true;
         const { id,name } = this.categoryForm.value;
         const category: Category = {
           id: id as number,
@@ -45,6 +48,7 @@ export class CategoryEdit {
             toast.error('Expense tracker', {
               description: 'There was an error while trying to edit the category',
             });
+            this.isSubmiting=false;
           }
         });
       }

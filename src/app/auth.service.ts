@@ -10,12 +10,7 @@ export class AuthService {
   constructor() { 
 
   }
-  setAuthToken(token:string){
-    localStorage.setItem("auth_token",token)
-  }
-  getAuthToken(){
-    return localStorage.getItem("auth_token");
-  }
+ 
   logIn(username:string, password:string){
     const body = {  
       email:username,

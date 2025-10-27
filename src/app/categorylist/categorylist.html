@@ -1,6 +1,6 @@
  <div class="w-full">
     <div class="flex justify-end mb-4">
-        <z-button  zType="default" title="Create">
+        <z-button  zType="default" title="Create" (click)="redirectoToCreate()">
             Create
         </z-button>
     </div>
@@ -8,9 +8,7 @@
         <table z-table>
           <thead z-table-header>
             <tr z-table-row>
-              <th z-table-head>Description</th>
-              <th z-table-head class="text-right">Group</th>
-              <th z-table-head>Amount</th>              
+              <th z-table-head>Name</th>                           
               <th z-table-head class="w-16">Actions</th>
             </tr>
           </thead>
@@ -18,7 +16,7 @@
             @for (category of categorys$|async; track category.id) {
               <tr z-table-row>
                 <td z-table-cell>
-                    {{category.description}}
+                    {{category.name}}
                 </td>              
                 <td z-table-cell>
                   <div class="flex items-center gap-2">

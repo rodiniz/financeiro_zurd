@@ -1,7 +1,7 @@
 
 <div class="flex items-center justify-center min-h-screen bg-slate-800 text-foreground">
 <z-card class="w-full max-w-sm shadow-white shadow-2xl" zTitle="Login to your account" zDescription="Enter your email below to login to your account">
-    <form  [formGroup]="loginForm" class="space-y-6 max-w-sm">
+    <form  [formGroup]="loginForm" class="space-y-6 max-w-sm" (ngSubmit)="login()">
     <div class="space-y-4">
     <z-form-field>
         <label z-form-label zRequired [for]="idEmail">E-Mail</label>
@@ -27,7 +27,11 @@
           />
         </div>
         <div class="space-y-2">
-          <z-button zType="default" class="w-full" (click)="login()" >Login</z-button>
+          <z-button zType="default" class="w-full" [zLoading]="isCallingLogin" (click)="login()">
+            <button type="submit">
+              Login
+            </button>
+          </z-button>
           <z-button zType="outline" class="w-full" (click)="goToRegister()">Register</z-button>
         </div>
       </div>

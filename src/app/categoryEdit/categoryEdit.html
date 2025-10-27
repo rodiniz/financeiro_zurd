@@ -1,22 +1,25 @@
-<z-card class="w-full max-w-sm shadow-white shadow-2xl" zTitle="Login to your account" zDescription="Enter your email below to login to your account">
-    <h2>{{ isEditing ? 'Edit Category' : 'New Category' }}</h2>
+<div class="flex items-center justify-center ">
+<z-card class="w-full max-w-3xl shadow-white shadow-2xl" [zTitle]="isEditing ? 'Edit Category' : 'New Category' ">  
     
     <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
     <input type="hidden" formControlName="id">
       <z-form-field>
             <label z-form-label zRequired >Category Name</label>
             <z-form-control>
-            <input z-input formControlName="name" type="text" [id]="nameControl" name="name" 
+            <input z-input formControlName="name" type="text" name="name" 
             [zStatus]="nameControl.invalid && nameControl.touched ? 'error' : undefined"/>
         </z-form-control>
       
        </z-form-field>      
        
-        <div class="button-group mt-3">            
-            <button type="submit" class="btn btn-primary" [disabled]="categoryForm.invalid">
-                Save
-            </button>
-            <z-button zType="default" class="w-full" (click)="cancel()" >Cancel</z-button>          
+        <div class="button-group mt-3 flex items-center justify-center ">
+             <z-button class="w-1/3" [zLoading]="isSubmiting" (click)="onSubmit()">
+                <button type="submit"  [disabled]="categoryForm.invalid" >
+                    Save
+                </button>
+            </z-button>            
+            <z-button zType="secondary" class="w-1/3 ml-3" (click)="cancel()" >Cancel</z-button>          
         </div>
     </form>
 </z-card>
+</div>
