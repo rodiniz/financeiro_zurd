@@ -22,14 +22,7 @@ export class Categorylist implements OnInit {
   categoryservice = inject(CategoryService);
   router=inject(Router);
   ngOnInit(): void {
-    this.categoryservice.get().subscribe({
-      next: (resp) => {
-        this.categorys$ = resp;
-      },
-      error: (err) => {
-        console.log(err)
-      }
-    });
+    this.categorys$= this.categoryservice.get();
   }
 
   redirectoToCreate() {

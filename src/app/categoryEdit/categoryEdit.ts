@@ -17,7 +17,7 @@ import { toast } from 'ngx-sonner';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CategoryEdit {
-  @Input() id!: number;
+  @Input() id: number=0;
   categoryService=inject(CategoryService);
   isEditing: boolean=false;
   isSubmiting=false;
@@ -32,7 +32,7 @@ export class CategoryEdit {
   }
 
   onSubmit() {
-    debugger;
+   
     if(this.categoryForm.valid){
         this.isSubmiting=true;
         const { id,name } = this.categoryForm.value;
@@ -42,19 +42,20 @@ export class CategoryEdit {
         };
         this.categoryService.post(category).subscribe({
           next:(resp)=>{                          
-            this.router.navigate(['categorys']);
+            this.router.navigate(['dashboard/categorys']);
           },
           error:(err)=>{
+            this.isSubmiting=false;
             toast.error('Expense tracker', {
               description: 'There was an error while trying to edit the category',
             });
-            this.isSubmiting=false;
+            
           }
         });
       }
   }
   cancel() {
-     this.router.navigate(['categorys']);
+     this.router.navigate(['dashboard/categorys']);
   }
 
 }
