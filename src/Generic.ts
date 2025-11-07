@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +21,6 @@ export abstract  class GenericService<T> {
     return this.httpclient.put(`/api${this._urlgroup}`,entity)
   }
   delete(id:number){
-    return this.httpclient.delete(`/api${this._urlgroup}/{id}`) 
+    return this.httpclient.delete(`/api${this._urlgroup}/${id}`) 
   }
 }

@@ -6,7 +6,7 @@ import { Category } from './app/models/Category';
   providedIn: 'root'
 })
 export class CategoryService extends GenericService<Category> {
-  constructor() {
+   constructor() {
     super('Category');
   }
 }

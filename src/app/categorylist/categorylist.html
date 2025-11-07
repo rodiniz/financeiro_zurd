@@ -13,18 +13,18 @@
             </tr>
           </thead>
           <tbody z-table-body>
-            @for (category of categorys$|async; track category.id) {
+            @for (category of categorys(); track category.id) {
               <tr z-table-row>
                 <td z-table-cell>
                     {{category.name}}
                 </td>              
                 <td z-table-cell>
                   <div class="flex items-center gap-2">
-                    <z-button zType="ghost" zSize="icon"  title="ID">
-                      <div class="icon-pencil"></div>
+                    <z-button zType="ghost" zSize="default"  title="ID" (click)="redirectToId(category.id)">
+                      <div class="icon-pencil"></div>Edit
                     </z-button>
-                    <z-button zType="ghost" zSize="icon" title="View details">
-                      <div class="icon-trash"></div>
+                    <z-button zType="ghost" zSize="default" (click)="deleteCategory(category.id)" >
+                      <div class="icon-trash"></div> Delete
                     </z-button>
                   </div>
                 </td>
