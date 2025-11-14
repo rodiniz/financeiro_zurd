@@ -1,14 +1,12 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment.development';
-import { PostgrestClient } from '@supabase/postgrest-js'
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private client=inject(HttpClient);
+  client=inject(HttpClient);
   constructor() { 
-
   }
  
   logIn(username:string, password:string){
@@ -25,5 +23,9 @@ export class AuthService {
     };
     return this.client.post('/api/register', body);
    }
+
+  isAuthenticated(){
+    return localStorage.getItem('fin_auth_token') !==null
+  }
 
 }

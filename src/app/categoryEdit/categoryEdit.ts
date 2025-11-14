@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ZardButtonComponent } from '@shared/components/button/button.component';
 import { ZardCardComponent } from '@shared/components/card/card.component';
@@ -16,7 +16,8 @@ import { toast } from 'ngx-sonner';
   styleUrl: './categoryEdit.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CategoryEdit {
+export class CategoryEdit implements OnInit {
+
   @Input() id: number=0;
   categoryService=inject(CategoryService);
   isEditing: boolean=false;
@@ -31,6 +32,17 @@ export class CategoryEdit {
     return this.categoryForm.get('name')!;
   }
 
+  ngOnInit(): void {
+     if(this.id){
+       this.categoryService.get(this.id).subscribe({
+        next:(resp)=>{
+          this.categoryForm.controls['name'].setValue(resp.name);
+          this.categoryForm.controls['id'].setValue(resp.id);
+        }
+       })
+     }
+  }
+
   onSubmit() {
    
     if(this.categoryForm.valid){
@@ -40,6 +52,31 @@ export class CategoryEdit {
           id: id as number,
           name:name as string
         };
+        if(id){
+          this.updateCategory(category);
+        }
+        else{
+          this.addCategory(category);
+        }
+      }
+  }
+   updateCategory(category:Category){      
+        
+        this.categoryService.put(category.id,{name: category.name}).subscribe({
+          next:(resp)=>{                          
+            this.router.navigate(['dashboard/categorys']);
+          },
+          error:(err)=>{
+            this.isSubmiting=false;
+            toast.error('Expense tracker', {
+              description: 'There was an error while trying to edit the category',
+            });
+            
+          }
+        });
+  }
+  addCategory(category:Category){      
+    
         this.categoryService.post(category).subscribe({
           next:(resp)=>{                          
             this.router.navigate(['dashboard/categorys']);
@@ -52,7 +89,6 @@ export class CategoryEdit {
             
           }
         });
-      }
   }
   cancel() {
      this.router.navigate(['dashboard/categorys']);

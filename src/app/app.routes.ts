@@ -6,6 +6,7 @@ import { ExpenseslistComponent } from './expenseslist/expenseslist.component';
 import { FulldashboardComponent } from './fulldashboard/fulldashboard.component';
 import { Categorylist } from './categorylist/categorylist';
 import { CategoryEdit } from './categoryEdit/categoryEdit';
+import { authGuard } from './auth-guard';
 
 export const routes: Routes = [
     {
@@ -19,6 +20,7 @@ export const routes: Routes = [
     {
         path:'dashboard',
         component:DashboardComponent,
+        canActivate:[authGuard],
         children:[
             {
                 path:'',

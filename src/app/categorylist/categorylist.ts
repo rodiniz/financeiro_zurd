@@ -28,9 +28,9 @@ export class Categorylist implements OnInit {
   }
 
   loadData(){
-    this.categoryservice.get().subscribe({
+    this.categoryservice.getPaged('name',0).subscribe({
         next:(resp)=>{         
-          this.categorys.set(resp);
+          this.categorys.set(resp.items);
         },
         error:(err)=>{
           
