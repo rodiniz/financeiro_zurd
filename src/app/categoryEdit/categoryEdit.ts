@@ -33,7 +33,7 @@ export class CategoryEdit implements OnInit {
   }
 
   ngOnInit(): void {
-     if(this.id){
+     if(this.id){      
        this.categoryService.get(this.id).subscribe({
         next:(resp)=>{
           this.categoryForm.controls['name'].setValue(resp.name);
@@ -63,10 +63,10 @@ export class CategoryEdit implements OnInit {
    updateCategory(category:Category){      
         
         this.categoryService.put(category.id,{name: category.name}).subscribe({
-          next:(resp)=>{                          
+          next:(_resp)=>{                          
             this.router.navigate(['dashboard/categorys']);
           },
-          error:(err)=>{
+          error:(_err)=>{
             this.isSubmiting=false;
             toast.error('Expense tracker', {
               description: 'There was an error while trying to edit the category',
@@ -78,10 +78,10 @@ export class CategoryEdit implements OnInit {
   addCategory(category:Category){      
     
         this.categoryService.post(category).subscribe({
-          next:(resp)=>{                          
+          next:(_resp)=>{                          
             this.router.navigate(['dashboard/categorys']);
           },
-          error:(err)=>{
+          error:(_err)=>{
             this.isSubmiting=false;
             toast.error('Expense tracker', {
               description: 'There was an error while trying to edit the category',

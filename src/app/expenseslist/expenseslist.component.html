@@ -1,6 +1,6 @@
  <div class="w-full">
     <div class="flex justify-end mb-4">
-        <z-button  zType="default" title="Create">
+        <z-button  zType="default" title="Create" (click)="redirectoToCreate()">
             Create
         </z-button>
     </div>
@@ -8,31 +8,23 @@
         <table z-table>
           <thead z-table-header>
             <tr z-table-row>
-              <th z-table-head>Description</th>
-              <th z-table-head class="text-right">Group</th>
-              <th z-table-head>Amount</th>              
+              <th z-table-head>Name</th>                           
               <th z-table-head class="w-16">Actions</th>
             </tr>
           </thead>
           <tbody z-table-body>
-            @for (expense of expenses; track expense.id) {
+            @for (category of expenses(); track category.id) {
               <tr z-table-row>
                 <td z-table-cell>
-                    {{expense.description}}
-                </td>
-                <td z-table-cell>
-                  <div >{{expense.amount}}</div>
-                </td>
-                <td z-table-cell>
-                 <div >{{expense.group}}</div>
-                </td>
+                    {{category.description}}
+                </td>              
                 <td z-table-cell>
                   <div class="flex items-center gap-2">
-                    <z-button zType="ghost" zSize="icon"  title="Copy payment ID">
-                      <div class="icon-copy"></div>
+                    <z-button zType="ghost" zSize="default"  title="ID" (click)="redirectToId(category.id)">
+                      <div class="icon-pencil"></div>Edit
                     </z-button>
-                    <z-button zType="ghost" zSize="icon" title="View details">
-                      <div class="icon-eye"></div>
+                    <z-button zType="ghost" zSize="default" (click)="deleteCategory(category.id)" >
+                      <div class="icon-trash"></div> Delete
                     </z-button>
                   </div>
                 </td>

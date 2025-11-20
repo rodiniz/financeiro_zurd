@@ -50,7 +50,7 @@ export class LoginComponent {
             const {email, password}=this.loginForm.value;
             this.authservice.logIn(email??'',password??'').subscribe({
               next:(resp)=>{               
-                var tk= resp as Token;               
+                const tk= resp as Token;               
                 this.tokenservice.setAuthToken(tk.accessToken)
                 this.router.navigate(['dashboard']);
                 this.isCallingLogin=false;

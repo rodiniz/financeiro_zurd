@@ -54,10 +54,10 @@ export class Categorylist implements OnInit {
       zOnOk: _instance => {
         console.log(id);
         this.categoryservice.delete(id).subscribe({
-          next: (resp) => {          
+          next: (_resp) => {          
             this.loadData();
           },
-          error: (err) => {          
+          error: (_err) => {          
             toast.error('Expense tracker', {
               description: 'Error deleting category',
             });

@@ -2,5 +2,7 @@ export interface Expense{
     id:number,
     description:string,
     amount:number,
-    group:string
+    date:string,
+    category:string,
+    categoryId:number
 }
