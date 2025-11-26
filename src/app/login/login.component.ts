@@ -26,7 +26,7 @@ export class LoginComponent {
   private tokenservice= inject(TokenService);
   protected readonly idEmail = generateId('email');
   protected readonly idPassword = generateId('password');
-  isCallingLogin=false;
+  isCallingLogin=signal(false);
   categories:any;
   loginForm= new FormGroup({    
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -46,17 +46,17 @@ export class LoginComponent {
   }
   async login(){
        if(this.loginForm.valid){
-            this.isCallingLogin=true;
+            this.isCallingLogin.set(true);
             const {email, password}=this.loginForm.value;
             this.authservice.logIn(email??'',password??'').subscribe({
               next:(resp)=>{               
                 const tk= resp as Token;               
                 this.tokenservice.setAuthToken(tk.accessToken)
                 this.router.navigate(['dashboard']);
-                this.isCallingLogin=false;
+                this.isCallingLogin.set(false)
               },
               error:(err)=>{
-                 this.isCallingLogin=false;
+                 this.isCallingLogin.set(false);
                  toast.error('Expense tracker', {
                   description: 'Ivalid user name or password',
                 });

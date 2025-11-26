@@ -27,11 +27,10 @@
           />
         </div>
         <div class="space-y-2">
-          <z-button zType="default" class="w-full" [zLoading]="isCallingLogin" (click)="login()">
-            <button type="submit">
+             <button type="submit" zType="default" class="w-full" z-button  type="submit" [zLoading]="isCallingLogin()">
               Login
             </button>
-          </z-button>
+          
           <z-button zType="outline" class="w-full" (click)="goToRegister()">Register</z-button>
         </div>
       </div>

@@ -13,12 +13,12 @@
        </z-form-field>      
        
         <div class="button-group mt-3 flex items-center justify-center ">
-             <z-button class="w-1/3" [zLoading]="isSubmiting" (click)="onSubmit()">
-                <button type="button"  [disabled]="categoryForm.invalid" >
-                    Save
-                </button>
-            </z-button>            
-            <z-button zType="secondary" class="w-1/3 ml-3" (click)="cancel()" >Cancel</z-button>          
+             
+            <button class="w-1/3" [zLoading]="isSubmiting()" z-button type="submit"  [disabled]="categoryForm.invalid" >
+                Save
+            </button>
+                       
+            <button z-button zType="secondary" class="w-1/3 ml-3" (click)="cancel()" >Cancel</button>          
         </div>
     </form>
 </z-card>

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input, OnInit, signal } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ZardButtonComponent } from '@shared/components/button/button.component';
 import { ZardCardComponent } from '@shared/components/card/card.component';
@@ -21,7 +21,7 @@ export class CategoryEdit implements OnInit {
   @Input() id: number=0;
   categoryService=inject(CategoryService);
   isEditing: boolean=false;
-  isSubmiting=false;
+  isSubmiting=signal(false);
   categoryForm= new FormGroup({    
     id: new FormControl<number>(this.id),
     name: new FormControl('', [Validators.required])
@@ -46,7 +46,7 @@ export class CategoryEdit implements OnInit {
   onSubmit() {
    
     if(this.categoryForm.valid){
-        this.isSubmiting=true;
+        this.isSubmiting.set(true);
         const { id,name } = this.categoryForm.value;
         const category: Category = {
           id: id as number,
@@ -67,7 +67,7 @@ export class CategoryEdit implements OnInit {
             this.router.navigate(['dashboard/categorys']);
           },
           error:(_err)=>{
-            this.isSubmiting=false;
+            this.isSubmiting.set(false);
             toast.error('Expense tracker', {
               description: 'There was an error while trying to edit the category',
             });
@@ -82,7 +82,7 @@ export class CategoryEdit implements OnInit {
             this.router.navigate(['dashboard/categorys']);
           },
           error:(_err)=>{
-            this.isSubmiting=false;
+            this.isSubmiting.set(false);
             toast.error('Expense tracker', {
               description: 'There was an error while trying to edit the category',
             });
